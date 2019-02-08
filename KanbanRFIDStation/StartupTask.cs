@@ -44,6 +44,7 @@ namespace KanbanRFIDStation
             hostName = GetHostName();
 
             client = new HttpClient();
+            //TODO: Find a solution to fix the static IP into a dynamic solution. First idea is to set the server IP by a get from the server webapplication.
             client.BaseAddress = new Uri("http://192.168.178.21/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -78,7 +79,6 @@ namespace KanbanRFIDStation
                 else
                 {
                     mfrc.HaltTag();
-                    //loggingChannel.LogMessage("No RFID tag present");
                 }
             }
         }
