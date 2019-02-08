@@ -1,2 +1,2 @@
 # RFIDKanban
-An electronic version of the kanban coin game using RFID tags
+An electronic version of the kanban coin game using RFID tags. Multiple RaspberryPi3 machines are used in combination with a RC522 RFID reader. Windows 10 IoT Core is used as the OS for the RaspberryPi3 machines. The server uses a .NET MVC Web Application that validates the data and persists the registrations in SQL Server DB. Power BI Desktop is used to visualize the data in multiple graphs.
