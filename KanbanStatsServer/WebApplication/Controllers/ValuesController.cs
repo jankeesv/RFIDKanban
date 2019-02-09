@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using WebApplication.Model;
 
 namespace WebApplication.Controllers
 {
@@ -26,6 +27,8 @@ namespace WebApplication.Controllers
         {
             string rfidUid = value.rfidUid.Value;
             string hostName = value.hostName.Value;
+
+            var registration = new RfidRegistration { RfidUid = rfidUid, StationId = hostName, registrationDateTime = DateTime.Now };
         }
 
         // PUT api/values/5
