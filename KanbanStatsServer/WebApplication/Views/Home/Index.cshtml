@@ -5,18 +5,15 @@
 </div>
 <div class="row">
     <div class="col-md-4">
-        <h2>Get started</h2>
-        <p>Set the station names based on the students name and do some basic checks.</p>
-        <p>@Html.ActionLink("Continue", "Index", "Setup", new { area = "" }, new {@class = "btn btn-default" })</p>
+        <h2>RFID Tags</h2>
+        <p>Overview of all registered RFID tags in the system that are valid. Tags not in the list can't be used.</p>
+        <p>@Html.ActionLink("Tags", "Index", "RFIDTags", new { area = "" }, new {@class = "btn btn-default" })</p>
     </div>
     <div class="col-md-4">
-        <h2>Start the exercise</h2>
-        <p>Enable registrations for all stations and start the kanban exercises.</p>
-        <p><a class="btn btn-default" href="#">Continue</a></p>
+        <h2>Registrations</h2>
+        <p>Overview of all registrations in the current exercise.</p>
+        <p>@Html.ActionLink("Registrations", "Index", "RFIDRegistrations", new { area = "" }, new { @class = "btn btn-default" })</p>
     </div>
     <div class="col-md-4">
-        <h2>Clean up</h2>
-        <p>Remove all the registrations from the database.</p>
-        <p><a class="btn btn-default" href="#">Continue</a></p>
     </div>
 </div>
