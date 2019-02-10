@@ -4,15 +4,10 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RFIDKanbanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'RFIDKanban.dbo.RFIDTag' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+    <Schema Namespace="RFIDKanbanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="RFIDTag">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="RFIDUID" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="Type" />
           </Key>
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="RFIDUID" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -20,26 +15,15 @@ warning 6002: The table/view 'RFIDKanban.dbo.RFIDTag' does not have a primary ke
           <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityContainer Name="RFIDKanbanModelStoreContainer">
-          <EntitySet Name="RFIDTag" EntityType="Self.RFIDTag" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [RFIDTag].[ID] AS [ID], 
-    [RFIDTag].[RFIDUID] AS [RFIDUID], 
-    [RFIDTag].[Name] AS [Name], 
-    [RFIDTag].[Type] AS [Type]
-    FROM [dbo].[RFIDTag] AS [RFIDTag]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="RFIDTag" EntityType="Self.RFIDTag" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RFIDKanbanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="RFIDTag">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="RFIDUID" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="Type" />
           </Key>
           <Property Name="ID" Type="Guid" Nullable="false" />
           <Property Name="RFIDUID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />

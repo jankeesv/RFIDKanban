@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
@@ -26,6 +27,21 @@ namespace WebApplication.Controllers
         {
             string rfidUid = value.rfidUid.Value;
             string hostName = value.hostName.Value;
+
+            using (var context = new RFIDKanbanEntities())
+            {
+                //Check if RFID exists before creating a registration
+                var registeredRfidTag = context.RFIDTag.Where(r => r.RFIDUID == rfidUid).FirstOrDefault();
+
+                if(registeredRfidTag == null)
+                {
+                    throw new HttpResponseException(HttpStatusCode.NotFound);
+                }
+
+                //Register a new RFID tag
+                //context.RFIDTag.Add(new RFIDTag { ID = Guid.NewGuid(), Name = "Drop ", RFIDUID = rfidUid, Type = "Drop" });
+                //context.SaveChanges();
+            }
         }
 
         // PUT api/values/5
