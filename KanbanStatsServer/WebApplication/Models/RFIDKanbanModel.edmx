@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="RFIDKanbanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="RFIDRegistrations">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TagName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Station" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RegistrationDateTime" Type="datetime" Nullable="false" />
+          <Property Name="ExerciseName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="RFIDTag">
           <Key>
             <PropertyRef Name="ID" />
@@ -15,6 +25,7 @@
           <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityContainer Name="RFIDKanbanModelStoreContainer">
+          <EntitySet Name="RFIDRegistrations" EntityType="Self.RFIDRegistrations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RFIDTag" EntityType="Self.RFIDTag" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -32,7 +43,18 @@
         </EntityType>
         <EntityContainer Name="RFIDKanbanEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="RFIDTag" EntityType="Self.RFIDTag" />
+          <EntitySet Name="RFIDRegistrations" EntityType="RFIDKanbanModel.RFIDRegistrations" />
         </EntityContainer>
+        <EntityType Name="RFIDRegistrations">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="Station" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RegistrationDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExerciseName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TagName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -46,6 +68,17 @@
                 <ScalarProperty Name="RFIDUID" ColumnName="RFIDUID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RFIDRegistrations">
+            <EntityTypeMapping TypeName="RFIDKanbanModel.RFIDRegistrations">
+              <MappingFragment StoreEntitySet="RFIDRegistrations">
+                <ScalarProperty Name="TagName" ColumnName="TagName" />
+                <ScalarProperty Name="ExerciseName" ColumnName="ExerciseName" />
+                <ScalarProperty Name="RegistrationDateTime" ColumnName="RegistrationDateTime" />
+                <ScalarProperty Name="Station" ColumnName="Station" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -33,10 +33,16 @@ namespace WebApplication.Controllers
                 //Check if RFID exists before creating a registration
                 var registeredRfidTag = context.RFIDTag.Where(r => r.RFIDUID == rfidUid).FirstOrDefault();
 
+                //If tag is not registered throw an exception
                 if(registeredRfidTag == null)
                 {
                     throw new HttpResponseException(HttpStatusCode.NotFound);
                 }
+
+                string exerciseName = "test";
+                //Create a new registration based on the station name and rfid tag
+                context.RFIDRegistrations.Add(new RFIDRegistrations { ID = Guid.NewGuid(), TagName = registeredRfidTag.Name, Station = hostName, RegistrationDateTime = DateTime.Now, ExerciseName = exerciseName });
+                context.SaveChanges();
 
                 //Register a new RFID tag
                 //context.RFIDTag.Add(new RFIDTag { ID = Guid.NewGuid(), Name = "Drop ", RFIDUID = rfidUid, Type = "Drop" });
