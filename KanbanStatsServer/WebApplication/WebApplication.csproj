@@ -211,6 +211,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RFIDRegistrationsController.cs" />
+    <Compile Include="Controllers\RFIDStationsController.cs" />
     <Compile Include="Controllers\RFIDTagsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -235,6 +236,9 @@
       <DependentUpon>RFIDKanbanModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\RFIDRegistrations.cs">
+      <DependentUpon>RFIDKanbanModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RFIDStations.cs">
       <DependentUpon>RFIDKanbanModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RFIDTag.cs">
@@ -326,6 +330,11 @@
     <Content Include="Views\RFIDTags\Details.cshtml" />
     <Content Include="Views\RFIDTags\Edit.cshtml" />
     <Content Include="Views\RFIDTags\Index.cshtml" />
+    <Content Include="Views\RFIDStations\Create.cshtml" />
+    <Content Include="Views\RFIDStations\Delete.cshtml" />
+    <Content Include="Views\RFIDStations\Details.cshtml" />
+    <Content Include="Views\RFIDStations\Edit.cshtml" />
+    <Content Include="Views\RFIDStations\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

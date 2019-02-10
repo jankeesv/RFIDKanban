@@ -26,7 +26,7 @@ namespace WebApplication.Controllers
         public void Post([FromBody]dynamic value)
         {
             string rfidUid = value.rfidUid.Value;
-            string hostName = value.hostName.Value;
+            string name = value.hostName.Value;
 
             using (var context = new RFIDKanbanEntities())
             {
@@ -40,8 +40,14 @@ namespace WebApplication.Controllers
                 }
 
                 string exerciseName = "test";
+                //Find the participants name based on the hostname
+                var station = context.RFIDStations.Where(s => s.Hostname.Equals(name)).FirstOrDefault();
+                if(station != null)
+                {
+                    name = station.ParticipantName;
+                }
                 //Create a new registration based on the station name and rfid tag
-                context.RFIDRegistrations.Add(new RFIDRegistrations { ID = Guid.NewGuid(), TagName = registeredRfidTag.Name, Station = hostName, RegistrationDateTime = DateTime.Now, ExerciseName = exerciseName });
+                context.RFIDRegistrations.Add(new RFIDRegistrations { ID = Guid.NewGuid(), TagName = registeredRfidTag.Name, Station = name, RegistrationDateTime = DateTime.Now, ExerciseName = exerciseName });
                 context.SaveChanges();
 
                 //Register a new RFID tag

@@ -7,6 +7,7 @@
       <Diagram DiagramId="4de94227c33541cdb77afcbd8a1e6958" Name="Diagram1">
         <EntityTypeShape EntityType="RFIDKanbanModel.RFIDTag" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="RFIDKanbanModel.RFIDRegistrations" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="RFIDKanbanModel.RFIDStations" Width="1.5" PointX="0.75" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
