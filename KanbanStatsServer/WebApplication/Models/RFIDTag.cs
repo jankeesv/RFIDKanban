@@ -16,7 +16,7 @@ namespace WebApplication.Models
     {
         public System.Guid ID { get; set; }
         public string RFIDUID { get; set; }
-        public string Name { get; set; }
-        public string Type { get; set; }
+        public string TagName { get; set; }
+        public string TagType { get; set; }
     }
 }

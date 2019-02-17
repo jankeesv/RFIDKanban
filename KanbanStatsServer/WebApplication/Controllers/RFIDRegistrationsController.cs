@@ -17,7 +17,7 @@ namespace WebApplication.Controllers
         // GET: RFIDRegistrations
         public ActionResult Index()
         {
-            return View(db.RFIDRegistrations.ToList().OrderBy(r => r.RegistrationDateTime));
+            return View(db.RFIDRegistrations.ToList());
         }
 
         // GET: RFIDRegistrations/Details/5
@@ -46,7 +46,7 @@ namespace WebApplication.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Station,RegistrationDateTime,ExerciseName,TagName")] RFIDRegistrations rFIDRegistrations)
+        public ActionResult Create([Bind(Include = "ID,RegistrationDateTime,ExerciseName,TagName,TagType,HostName,ParticipantName")] RFIDRegistrations rFIDRegistrations)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace WebApplication.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Station,RegistrationDateTime,ExerciseName,TagName")] RFIDRegistrations rFIDRegistrations)
+        public ActionResult Edit([Bind(Include = "ID,RegistrationDateTime,ExerciseName,TagName,TagType,HostName,ParticipantName")] RFIDRegistrations rFIDRegistrations)
         {
             if (ModelState.IsValid)
             {

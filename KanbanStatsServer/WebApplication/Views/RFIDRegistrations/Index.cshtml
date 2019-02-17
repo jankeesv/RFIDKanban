@@ -5,16 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Registrations</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Station)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.RegistrationDateTime)
         </th>
@@ -24,14 +21,20 @@
         <th>
             @Html.DisplayNameFor(model => model.TagName)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TagType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HostName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ParticipantName)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Station)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.RegistrationDateTime)
         </td>
@@ -40,6 +43,15 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.TagName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TagType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HostName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ParticipantName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

@@ -15,9 +15,11 @@ namespace WebApplication.Models
     public partial class RFIDRegistrations
     {
         public System.Guid ID { get; set; }
-        public string Station { get; set; }
         public System.DateTime RegistrationDateTime { get; set; }
         public string ExerciseName { get; set; }
         public string TagName { get; set; }
+        public string TagType { get; set; }
+        public string HostName { get; set; }
+        public string ParticipantName { get; set; }
     }
 }

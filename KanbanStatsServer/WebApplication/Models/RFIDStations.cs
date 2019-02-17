@@ -15,7 +15,7 @@ namespace WebApplication.Models
     public partial class RFIDStations
     {
         public System.Guid ID { get; set; }
-        public string Hostname { get; set; }
         public string ParticipantName { get; set; }
+        public string HostName { get; set; }
     }
 }

@@ -11,7 +11,9 @@
           </Key>
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="TagName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Station" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TagType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HostName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ParticipantName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="RegistrationDateTime" Type="datetime" Nullable="false" />
           <Property Name="ExerciseName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -20,7 +22,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Hostname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HostName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ParticipantName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="RFIDTag">
@@ -29,8 +31,8 @@
           </Key>
           <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="RFIDUID" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TagName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TagType" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityContainer Name="RFIDKanbanModelStoreContainer">
           <EntitySet Name="RFIDRegistrations" EntityType="Self.RFIDRegistrations" Schema="dbo" store:Type="Tables" />
@@ -47,8 +49,8 @@
           </Key>
           <Property Name="ID" Type="Guid" Nullable="false" />
           <Property Name="RFIDUID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TagName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TagType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="RFIDKanbanEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="RFIDTag" EntityType="Self.RFIDTag" />
@@ -60,18 +62,20 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Guid" Nullable="false" />
-          <Property Name="Station" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RegistrationDateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ExerciseName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TagName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TagType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HostName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParticipantName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="RFIDStations">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Guid" Nullable="false" />
-          <Property Name="Hostname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ParticipantName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HostName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -82,20 +86,22 @@
           <EntitySetMapping Name="RFIDTag">
             <EntityTypeMapping TypeName="RFIDKanbanModel.RFIDTag">
               <MappingFragment StoreEntitySet="RFIDTag">
+                <ScalarProperty Name="TagType" ColumnName="TagType" />
+                <ScalarProperty Name="TagName" ColumnName="TagName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="RFIDUID" ColumnName="RFIDUID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RFIDRegistrations">
             <EntityTypeMapping TypeName="RFIDKanbanModel.RFIDRegistrations">
               <MappingFragment StoreEntitySet="RFIDRegistrations">
+                <ScalarProperty Name="ParticipantName" ColumnName="ParticipantName" />
+                <ScalarProperty Name="HostName" ColumnName="HostName" />
+                <ScalarProperty Name="TagType" ColumnName="TagType" />
                 <ScalarProperty Name="TagName" ColumnName="TagName" />
                 <ScalarProperty Name="ExerciseName" ColumnName="ExerciseName" />
                 <ScalarProperty Name="RegistrationDateTime" ColumnName="RegistrationDateTime" />
-                <ScalarProperty Name="Station" ColumnName="Station" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -103,8 +109,8 @@
           <EntitySetMapping Name="RFIDStations">
             <EntityTypeMapping TypeName="RFIDKanbanModel.RFIDStations">
               <MappingFragment StoreEntitySet="RFIDStations">
+                <ScalarProperty Name="HostName" ColumnName="HostName" />
                 <ScalarProperty Name="ParticipantName" ColumnName="ParticipantName" />
-                <ScalarProperty Name="Hostname" ColumnName="Hostname" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

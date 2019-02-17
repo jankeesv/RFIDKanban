@@ -325,16 +325,16 @@
     <Content Include="Views\RFIDRegistrations\Details.cshtml" />
     <Content Include="Views\RFIDRegistrations\Edit.cshtml" />
     <Content Include="Views\RFIDRegistrations\Index.cshtml" />
-    <Content Include="Views\RFIDTags\Create.cshtml" />
-    <Content Include="Views\RFIDTags\Delete.cshtml" />
-    <Content Include="Views\RFIDTags\Details.cshtml" />
-    <Content Include="Views\RFIDTags\Edit.cshtml" />
-    <Content Include="Views\RFIDTags\Index.cshtml" />
     <Content Include="Views\RFIDStations\Create.cshtml" />
     <Content Include="Views\RFIDStations\Delete.cshtml" />
     <Content Include="Views\RFIDStations\Details.cshtml" />
     <Content Include="Views\RFIDStations\Edit.cshtml" />
     <Content Include="Views\RFIDStations\Index.cshtml" />
+    <Content Include="Views\RFIDTags\Create.cshtml" />
+    <Content Include="Views\RFIDTags\Delete.cshtml" />
+    <Content Include="Views\RFIDTags\Details.cshtml" />
+    <Content Include="Views\RFIDTags\Edit.cshtml" />
+    <Content Include="Views\RFIDTags\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
