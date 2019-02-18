@@ -49,7 +49,10 @@ namespace WebApplication.Controllers
 
                 //Check if the combination of station and tag already is registered
                 string participantName;
-                var stationTagRegistrations = context.RFIDRegistrations.Where(s => (s.HostName == string.Format("{0}_doing", hostName) || s.HostName == string.Format("{0}_done", hostName)) && s.TagName == registeredRfidTag.TagName).ToList();
+                string hostNameDoing = string.Format("{0}_doing", hostName);
+                string hostNameDone = string.Format("{0}_done", hostName);
+
+                var stationTagRegistrations = context.RFIDRegistrations.Where(s => (s.HostName == hostNameDoing || s.HostName == hostNameDone) && s.TagName == registeredRfidTag.TagName).ToList();
                 if (stationTagRegistrations.Count == 0)
                 {
                     //Registration combination doesn't exist so state is doing

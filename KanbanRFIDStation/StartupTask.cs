@@ -21,7 +21,6 @@ namespace KanbanRFIDStation
         private GpioPin piezoPin;
         private GpioPinValue piezoPinValue;
         private Mfrc522 mfrc;
-        private string registeredUid;
         private string hostName;
         private LoggingChannel loggingChannel;
         private HttpClient client;
@@ -40,7 +39,6 @@ namespace KanbanRFIDStation
         public async void InitRC522Async()
         {
             mfrc = new Mfrc522();
-            registeredUid = String.Empty;
             hostName = GetHostName();
 
             client = new HttpClient();
@@ -58,9 +56,8 @@ namespace KanbanRFIDStation
                 if (mfrc.IsTagPresent())
                 {
                     string newUid = mfrc.ReadUid().ToString();
-                    //Check if the scanned uid is the same as the previous scan
                     //Value 00000000 is a wrong read
-                    if (!newUid.Equals(registeredUid) && !newUid.Equals("00000000"))
+                    if (!newUid.Equals("00000000"))
                     {
                         loggingChannel.LogMessage("RFID tag present with id: " + newUid + " at host " + hostName);
 
@@ -68,6 +65,8 @@ namespace KanbanRFIDStation
                         {
                             await PostRfidRegistration(newUid);
                             await PlayTune();
+                            //Wait a second to prevent double scans
+                            await Task.Delay(1000);
                         }
                         catch (Exception ex)
                         {
@@ -90,7 +89,6 @@ namespace KanbanRFIDStation
             HttpResponseMessage response = await client.PostAsync("api/values", httpContent);
             response.EnsureSuccessStatusCode();
             loggingChannel.LogMessage("RFID tag registered");
-            registeredUid = newUid;
         }
 
         private string GetHostName()
