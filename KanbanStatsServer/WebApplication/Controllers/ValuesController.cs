@@ -47,10 +47,31 @@ namespace WebApplication.Controllers
                     throw new HttpResponseException(HttpStatusCode.NotFound);
                 }
 
+                //Check if the combination of station and tag already is registered
+                string participantName;
+                var stationTagRegistrations = context.RFIDRegistrations.Where(s => (s.HostName == string.Format("{0}_doing", hostName) || s.HostName == string.Format("{0}_done", hostName)) && s.TagName == registeredRfidTag.TagName).ToList();
+                if (stationTagRegistrations.Count == 0)
+                {
+                    //Registration combination doesn't exist so state is doing
+                    participantName = station.ParticipantName + " (Doing)";
+                    hostName = hostName + "_doing";
+                }
+                else if(stationTagRegistrations.Count == 1)
+                {
+                    //Registration combination already exist so state is done
+                    participantName = station.ParticipantName + " (Done)";
+                    hostName = hostName + "_done";
+                }
+                else
+                {
+                    //Registration combinations already exist for doing and done so third try is not possible
+                    throw new HttpResponseException(HttpStatusCode.Unauthorized);
+                }
+
                 string exerciseName = "test";
 
                 //Create a new registration based on the station name and rfid tag
-                context.RFIDRegistrations.Add(new RFIDRegistrations { ID = Guid.NewGuid(), TagName = registeredRfidTag.TagName, TagType = registeredRfidTag.TagType, ParticipantName = station.ParticipantName, HostName = hostName, RegistrationDateTime = DateTime.Now, ExerciseName = exerciseName });
+                context.RFIDRegistrations.Add(new RFIDRegistrations { ID = Guid.NewGuid(), TagName = registeredRfidTag.TagName, TagType = registeredRfidTag.TagType, ParticipantName = participantName, HostName = hostName, RegistrationDateTime = DateTime.Now, ExerciseName = exerciseName });
                 context.SaveChanges();
 
                 //Register a new RFID tag
