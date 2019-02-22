@@ -28,5 +28,6 @@ namespace WebApplication.Models
         public virtual DbSet<RFIDTag> RFIDTag { get; set; }
         public virtual DbSet<RFIDRegistrations> RFIDRegistrations { get; set; }
         public virtual DbSet<RFIDStations> RFIDStations { get; set; }
+        public virtual DbSet<Exercises> Exercises { get; set; }
     }
 }

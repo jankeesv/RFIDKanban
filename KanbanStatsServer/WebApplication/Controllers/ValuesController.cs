@@ -71,7 +71,7 @@ namespace WebApplication.Controllers
                     throw new HttpResponseException(HttpStatusCode.Unauthorized);
                 }
 
-                string exerciseName = "test";
+                string exerciseName = "push";
 
                 //Create a new registration based on the station name and rfid tag
                 context.RFIDRegistrations.Add(new RFIDRegistrations { ID = Guid.NewGuid(), TagName = registeredRfidTag.TagName, TagType = registeredRfidTag.TagType, ParticipantName = participantName, HostName = hostName, RegistrationDateTime = DateTime.Now, ExerciseName = exerciseName });

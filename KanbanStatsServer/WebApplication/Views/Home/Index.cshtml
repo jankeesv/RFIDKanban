@@ -1,22 +1,36 @@
-﻿<div class="jumbotron">
+﻿<div class="row">
     <h1>RFID Kanban Game</h1>
     <p class="lead">An electronic version of the kanban coin game using RFID tags designed and developed by Jan Kees Velthoven. Multiple RaspberryPi3 machines are used in combination with a RC522 RFID reader. Windows 10 IoT Core is used as the OS for the RaspberryPi3 machines. The server uses a .NET MVC Web Application that validates the data and persists the registrations in SQL Server DB. Power BI Desktop is used to visualize the data in multiple graphs.</p>
-    <p><a href="https://github.com/jankeesv/RFIDKanban" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <p><a href="https://github.com/jankeesv/RFIDKanban">Learn more &raquo;</a></p>
 </div>
-<div class="row">
-    <div class="col-md-4">
-        <h2>RFID Tags</h2>
-        <p>Overview of all registered RFID tags in the system that are valid. Tags not in the list can't be used.</p>
-        <p>@Html.ActionLink("Tags", "Index", "RFIDTags", new { area = "" }, new {@class = "btn btn-default" })</p>
+<div class="row alert-success" >
+    <div class="col-md-12">
+        <h2>Active exercise</h2>
+        <p>Set the current exercise that is active.</p>
+        <p><a href="#" class="btn btn-primary btn-lg">Activate &raquo;</a></p>
     </div>
-    <div class="col-md-4">
+</div>
+<div class="row alert-info">
+    <div class="col-md-6">
+        <h2>Stations</h2>
+        <p>Overview of all stations and participants in the exercise.</p>
+        <p>@Html.ActionLink("Stations", "Index", "RFIDStations", new { area = "" }, new { @class = "btn btn-default" })</p>
+    </div>
+    <div class="col-md-6">
         <h2>Registrations</h2>
         <p>Overview of all registrations in the current exercise.</p>
         <p>@Html.ActionLink("Registrations", "Index", "RFIDRegistrations", new { area = "" }, new { @class = "btn btn-default" })</p>
     </div>
-    <div class="col-md-4">
-        <h2>Stations</h2>
-        <p>Overview of all stations and participants in the exercise.</p>
-        <p>@Html.ActionLink("Stations", "Index", "RFIDStations", new { area = "" }, new { @class = "btn btn-default" })</p>
+</div>
+<div class="row alert-danger">
+    <div class="col-md-6">
+        <h2>Exercises</h2>
+        <p>Overview of all exercises that can be filtered in Power BI.</p>
+        <p>@Html.ActionLink("Exercises", "Index", "Exercises", new { area = "" }, new { @class = "btn btn-default" })</p>
+    </div>
+    <div class="col-md-6">
+        <h2>RFID Tags</h2>
+        <p>Overview of all registered RFID tags in the system that are valid. Tags not in the list can't be used.</p>
+        <p>@Html.ActionLink("Tags", "Index", "RFIDTags", new { area = "" }, new { @class = "btn btn-default" })</p>
     </div>
 </div>
