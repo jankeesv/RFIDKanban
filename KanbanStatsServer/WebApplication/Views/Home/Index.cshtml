@@ -6,13 +6,20 @@
 </div>
 <div class="row alert-success" >
     <div class="col-md-12">
-        <h2>Active exercise</h2>
-        <p>Set the current exercise that is active.</p>
-        @using (Html.BeginForm("ActivateExercise", "Home", FormMethod.Post, new { role = "form" }))
+        <h2>Activate exercise</h2>
+        <p>Start an exercise and delete all registrations in the database. Make sure to export the previous exercise to PDF in Power BI before this action.</p>
+        @using (Html.BeginForm("ActivateExercise", "Home", FormMethod.Post, new { @id = "ActivationForm" }))
         {
         <p>@Html.DropDownListFor(m => m.ActiveExercise, Model.Exercises)</p>
-        <button type="submit" class="btn btn-primary btn-lg">Start exercise &raquo;</button>
+        <button type="submit" class="btn btn-primary">Start exercise &raquo;</button>
         }
+        <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript">
+            $("body").on("submit", "#ActivationForm", function () {
+            return confirm("Do you want to erase all existing registrations?");
+        });
+        </script>
+        <p>Warning: All existing registrations will be erased with this action.</p>
     </div>
 </div>
 <div class="row">

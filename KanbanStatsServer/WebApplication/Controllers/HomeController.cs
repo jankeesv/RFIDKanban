@@ -39,16 +39,21 @@ namespace WebApplication.Controllers
             {
                 if (ModelState.IsValid)
                 {
-
+                    //Find and set the active exercise in the application
                     Exercises activeExercise = context.Exercises.Where(x => x.ID.ToString().Equals(model.ActiveExercise)).FirstOrDefault();
                     this.HttpContext.Application["exercise"] = activeExercise;
+
+                    //Delete all registrations
+                    context.RFIDRegistrations.RemoveRange(context.RFIDRegistrations);
+                    context.SaveChanges();
+
                     ViewBag.Title = "RFID Kanban - " + activeExercise.ExerciseName;
 
                     return RedirectToAction("Index");
                 }
 
+                //Something is wrong. Pass the model again.
                 model.Exercises = context.Exercises.Select(x => new SelectListItem { Value = x.ID.ToString(), Text = x.ExerciseName }).ToList();
-
                 return View("Index", model);
             }
         }

@@ -17,7 +17,7 @@ namespace WebApplication.Controllers
         // GET: RFIDStations
         public ActionResult Index()
         {
-            return View(db.RFIDStations.ToList());
+            return View(db.RFIDStations.ToList().OrderBy(x => x.HostName));
         }
 
         // GET: RFIDStations/Details/5

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using WebApplication.Models;
 
@@ -71,7 +72,17 @@ namespace WebApplication.Controllers
                     throw new HttpResponseException(HttpStatusCode.Unauthorized);
                 }
 
-                string exerciseName = "push";
+                //Get the exercise name from the application
+                string exerciseName = string.Empty;
+                object httpContext;
+                if (Request.Properties.TryGetValue("MS_HttpContext", out httpContext))
+                {
+                    Exercises activeExercise = ((HttpContextBase)httpContext).Application["exercise"] as Exercises;
+                    if (activeExercise != null)
+                    {
+                        exerciseName = activeExercise.ExerciseName;
+                    }
+                }
 
                 //Create a new registration based on the station name and rfid tag
                 context.RFIDRegistrations.Add(new RFIDRegistrations { ID = Guid.NewGuid(), TagName = registeredRfidTag.TagName, TagType = registeredRfidTag.TagType, ParticipantName = participantName, HostName = hostName, RegistrationDateTime = DateTime.Now, ExerciseName = exerciseName });
