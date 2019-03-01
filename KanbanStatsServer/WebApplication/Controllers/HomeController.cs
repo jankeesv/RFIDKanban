@@ -14,8 +14,7 @@ namespace WebApplication.Controllers
             using (var context = new RFIDKanbanEntities())
             {
 
-                //TODO: Find a way to use the application wide context instead of session
-                Exercises activeExercise = this.HttpContext.Session["exercise"] as Exercises;
+                Exercises activeExercise = this.HttpContext.Application["exercise"] as Exercises;
 
                 if (activeExercise == null)
                 {
@@ -42,7 +41,7 @@ namespace WebApplication.Controllers
                 {
 
                     Exercises activeExercise = context.Exercises.Where(x => x.ID.ToString().Equals(model.ActiveExercise)).FirstOrDefault();
-                    this.HttpContext.Session["exercise"] = activeExercise;
+                    this.HttpContext.Application["exercise"] = activeExercise;
                     ViewBag.Title = "RFID Kanban - " + activeExercise.ExerciseName;
 
                     return RedirectToAction("Index");
