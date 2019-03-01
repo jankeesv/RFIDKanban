@@ -1,4 +1,5 @@
-﻿<div class="row">
+﻿@model WebApplication.Models.ExerciseActivationModel
+<div class="row">
     <h1>RFID Kanban Game</h1>
     <p class="lead">An electronic version of the kanban coin game using RFID tags designed and developed by Jan Kees Velthoven. Multiple RaspberryPi3 machines are used in combination with a RC522 RFID reader. Windows 10 IoT Core is used as the OS for the RaspberryPi3 machines. The server uses a .NET MVC Web Application that validates the data and persists the registrations in SQL Server DB. Power BI Desktop is used to visualize the data in multiple graphs.</p>
     <p><a href="https://github.com/jankeesv/RFIDKanban">Learn more &raquo;</a></p>
@@ -7,10 +8,14 @@
     <div class="col-md-12">
         <h2>Active exercise</h2>
         <p>Set the current exercise that is active.</p>
-        <p><a href="#" class="btn btn-primary btn-lg">Activate &raquo;</a></p>
+        @using (Html.BeginForm("ActivateExercise", "Home", FormMethod.Post, new { role = "form" }))
+        {
+        <p>@Html.DropDownListFor(m => m.ActiveExercise, Model.Exercises)</p>
+        <button type="submit" class="btn btn-primary btn-lg">Start exercise &raquo;</button>
+        }
     </div>
 </div>
-<div class="row alert-info">
+<div class="row">
     <div class="col-md-6">
         <h2>Stations</h2>
         <p>Overview of all stations and participants in the exercise.</p>

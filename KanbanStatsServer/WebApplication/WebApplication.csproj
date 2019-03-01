@@ -220,6 +220,7 @@
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ExerciseActivationModel.cs" />
     <Compile Include="Models\Exercises.cs">
       <DependentUpon>RFIDKanbanModel.tt</DependentUpon>
     </Compile>

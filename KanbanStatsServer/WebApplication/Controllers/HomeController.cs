@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
@@ -10,9 +11,47 @@ namespace WebApplication.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            using (var context = new RFIDKanbanEntities())
+            {
 
-            return View();
+                //TODO: Find a way to use the application wide context instead of session
+                Exercises activeExercise = this.HttpContext.Session["exercise"] as Exercises;
+
+                if (activeExercise == null)
+                {
+                    activeExercise = context.Exercises.Where(e => e.Sequence == 0).FirstOrDefault();
+                }
+
+                ViewBag.Title = "RFID Kanban - " + activeExercise.ExerciseName;
+
+                var model = new ExerciseActivationModel();
+
+                model.Exercises = context.Exercises.OrderBy(x => x.Sequence).Select(x => new SelectListItem { Value = x.ID.ToString(), Text = x.ExerciseName }).ToList();
+                model.ActiveExercise = activeExercise.ID.ToString();
+
+                return View(model);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ActivateExercise(ExerciseActivationModel model)
+        {
+            using (var context = new RFIDKanbanEntities())
+            {
+                if (ModelState.IsValid)
+                {
+
+                    Exercises activeExercise = context.Exercises.Where(x => x.ID.ToString().Equals(model.ActiveExercise)).FirstOrDefault();
+                    this.HttpContext.Session["exercise"] = activeExercise;
+                    ViewBag.Title = "RFID Kanban - " + activeExercise.ExerciseName;
+
+                    return RedirectToAction("Index");
+                }
+
+                model.Exercises = context.Exercises.Select(x => new SelectListItem { Value = x.ID.ToString(), Text = x.ExerciseName }).ToList();
+
+                return View("Index", model);
+            }
         }
     }
 }
